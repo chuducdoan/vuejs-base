@@ -1,0 +1,15 @@
+data binding: v-bind (có thể viết gọn hơn vd :value, :style, :class)
+event binding: v-on (có thể viết gọn hơn vd: @click)
+two way binding: v-model
+computed: going khái niệm useCallback, useMemo trong react, chỉ cập nhật khi những dữ lieu phụ thuộc thay đổi
+v-if, v-else, v-show
+v-for="(item, index) in items"
+
+Vòng đời:
+	+ createApp: beforeCreate() -> created() -> beforeMount() -> mounted()
+-> beforeUpdate -> updated()
+-> beforeUnmount -> Unmounted()
+
+props
+Dữ lieu 1 chiều
+provider + inject: cung cấp dữ liệu cho các component ở bất cứ đâu có thể sử dụng truy cập
