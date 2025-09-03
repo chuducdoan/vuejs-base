@@ -12,4 +12,16 @@ Vòng đời:
 
 props
 Dữ lieu 1 chiều
-provider + inject: cung cấp dữ liệu cho các component ở bất cứ đâu có thể sử dụng truy cập
+- provider + inject: 
+	+ cung cấp dữ liệu cho các component ở bất cứ đâu có thể sử dụng truy cập
+	+ có thể áp dụng với cả thuộc tính và phương thức
+
+- Giống children trong reactjs, ta sử dụng <slot></slot>
+	+ nếu muốn sử dụng nhiều hơn 1 vị trí, thêm thuộc tính name vd: <slot name="header"></slot> 
+	+ file chứa nó gọi <template v-slot:header></template> hoặc <template #header></template>
+	+ có thể truy cập dựa vào $slot.[tên slot], để trảnh render ra thành phần ronnxg khi bạn ko nhúng header 
+	VD: <header v-if="$slot.header"><slot name="header"></slot></header>
+- <style scoped></style>: style có phạm vi cho coponent đó thôi
+- Dynamic Component: <component :is="selectedComponent"></component>
+- Keep alive
+- teleport: dịch chuyển tới dưới 1 phần tử HTML nào đó

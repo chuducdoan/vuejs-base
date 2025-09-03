@@ -4,12 +4,36 @@
       :topic-title="activeTopic && activeTopic.title"
       :text="activeTopic && activeTopic.fullText"
     ></active-element>
-    <knowledge-base :topics="topics" @select-topic="activateTopic"></knowledge-base>
+    <knowledge-base
+      :topics="topics"
+      @select-topic="activateTopic"
+    ></knowledge-base>
+
+    <base-element #default="slotProps">
+      <p>body</p>
+      <p>{{ slotProps.item }}</p>
+    </base-element>
+
+    <button @click="setSelectedComponent('active-goals')">Active goals</button>
+    <button @click="setSelectedComponent('manage-goals')">Manage goals</button>
+
+    <div style="border: 1px solid black; margin: 1rem auto; padding: 1rem">
+      <keep-alive>
+        <component :is="selectedComponent"></component>
+      </keep-alive>
+    </div>
   </div>
 </template>
 
 <script>
+import ActiveGoals from './components/ActiveGoals.vue';
+import ManageGoals from './components/ManageGoals.vue';
+
 export default {
+  components: {
+    ActiveGoals,
+    ManageGoals,
+  },
   data() {
     return {
       topics: [
@@ -30,11 +54,21 @@ export default {
         },
       ],
       activeTopic: null,
+      selectedComponent: 'active-goals',
+    };
+  },
+  provide() {
+    return {
+      topics: this.topics,
+      selectTopic: this.activateTopic,
     };
   },
   methods: {
     activateTopic(topicId) {
       this.activeTopic = this.topics.find((topic) => topic.id === topicId);
+    },
+    setSelectedComponent(cmp) {
+      this.selectedComponent = cmp;
     },
   },
 };
