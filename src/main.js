@@ -15,7 +15,6 @@ import DetailResource from './components/resource/DetailResource.vue';
 import StoredResource from './components/resource/StoredResource.vue';
 import NotFound from './components/UI/NotFound.vue';
 
-const app = createApp(App);
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -35,20 +34,29 @@ const router = createRouter({
     {
       path: '/add-resource',
       component: AddResource,
+      beforeEnter(to, from, next) {
+        console.log('Before entering AddResource from', from, 'to', to);
+        next();
+      },
     },
-
     {
       path: '/:notFound(.*)',
       component: NotFound,
     },
   ],
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(_, _2, savedPosition) {
     if (savedPosition) {
       return savedPosition;
     }
     return { left: 0, top: 0 };
   },
 });
+router.beforeEach((to, from, next) => {
+  console.log('Navigating from', from, 'to', to);
+  next();
+});
+
+const app = createApp(App);
 
 app.component('active-element', ActiveElement);
 app.component('knowledge-base', KnowledgeBase);
