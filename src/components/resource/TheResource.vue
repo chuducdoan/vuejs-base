@@ -1,29 +1,32 @@
 <template>
   <base-card>
-    <base-button
+    <!-- <base-button
       @click="setSelectTab('stored-resource')"
       :mode="storedResButtonMode"
       >Stored Resources</base-button
     >
     <base-button @click="setSelectTab('add-resource')" :mode="addResButtonMode"
       >Add Resource</base-button
-    >
+    > -->
+    <router-link to="/resource">Stored Resources</router-link>
+    <router-link to="/add-resource">Add Resource</router-link>
   </base-card>
 
-  <keep-alive>
+  <!-- <keep-alive>
     <component :is="selectedTab"></component>
-  </keep-alive>
+  </keep-alive> -->
+  <router-view></router-view>
 </template>
 
 <script>
-import AddResource from './AddResource.vue';
-import StoredResource from './StoredResource.vue';
+// import AddResource from './AddResource.vue';
+// import StoredResource from './StoredResource.vue';
 
 export default {
-  components: {
-    AddResource,
-    StoredResource,
-  },
+  // components: {
+  //   AddResource,
+  //   StoredResource,
+  // },
 
   data() {
     return {
@@ -41,6 +44,18 @@ export default {
           description: 'Master Vue.js and build awesome, reactive web apps!',
           link: 'https://www.udemy.com/course/vuejs-2-the-complete-guide',
         },
+        {
+          id: 'a',
+          title: 'a',
+          description: 'Master Vue.js and build awesome, reactive web apps!',
+          link: 'https://www.udemy.com/course/vuejs-2-the-complete-guide',
+        },
+        {
+          id: 'b',
+          title: 'b',
+          description: 'Master Vue.js and build awesome, reactive web apps!',
+          link: 'https://www.udemy.com/course/vuejs-2-the-complete-guide',
+        },
       ],
     };
   },
@@ -51,18 +66,18 @@ export default {
       removeResource: this.removeResource,
     };
   },
-  computed: {
-    storedResButtonMode() {
-      return this.selectedTab === 'stored-resource' ? null : 'flat';
-    },
-    addResButtonMode() {
-      return this.selectedTab === 'add-resource' ? null : 'flat';
-    },
-  },
+  // computed: {
+  //   storedResButtonMode() {
+  //     return this.selectedTab === 'stored-resource' ? null : 'flat';
+  //   },
+  //   addResButtonMode() {
+  //     return this.selectedTab === 'add-resource' ? null : 'flat';
+  //   },
+  // },
   methods: {
-    setSelectTab(tab) {
-      this.selectedTab = tab;
-    },
+    // setSelectTab(tab) {
+    //   this.selectedTab = tab;
+    // },
     addResource(title, description, link) {
       console.log('Adding resource...');
       const newResource = {
@@ -72,7 +87,8 @@ export default {
         link,
       };
       this.storedResources.unshift(newResource);
-      this.selectedTab = 'stored-resource';
+      // this.selectedTab = 'stored-resource';
+      this.$router.push('/resource');
     },
     removeResource(resId) {
       // this.storedResources = this.storedResources.filter(
@@ -90,3 +106,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #640032;
+  padding: 16px;
+  border: 1px solid #640032;
+  margin-right: 16px;
+  transition: all 0.3s ease;
+}
+
+a:hover,
+a:active,
+a.router-link-active {
+  text-decoration: none;
+  border-color: #fff;
+  color: #fff;
+  background-color: #640032;
+}
+</style>

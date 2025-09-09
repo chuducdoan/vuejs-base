@@ -25,3 +25,16 @@ Dữ lieu 1 chiều
 - Dynamic Component: <component :is="selectedComponent"></component>
 - Keep alive
 - teleport: dịch chuyển tới dưới 1 phần tử HTML nào đó
+- props: ['modelValue']
+- emits: ['update:modelValue']
+- routing:
+	+ setup: npm i --save vue-router@next
+	+ router-view: đóng vai trò là chỗ hiển thị cho component được match theo URL.
+	+ router-link: chuyển hướng trang
+	+ điều hướng trang: this.$router.push('')
+	+ passing params as props
+	+ nested routes: với rested routes thì phải đặt router-view ở route cha.
+	+ name route: {name: 'router name', params: {ten_param: gia_tri}, query: {...}}
+	+ rendering multiple routes with named router views
+	+ Controlling Scroll Behavior: khi bạn nhấp vào 1 link router để chuyển trang và muốn scroll lên trên đầu mà ko muốn bị mắc kẹt ở dưới
+	cấu hình ở router, scrollBehavior() {...}

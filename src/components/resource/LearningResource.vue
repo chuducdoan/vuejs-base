@@ -10,6 +10,8 @@
       <p>{{ description }}</p>
       <nav>
         <a :href="link">View Resource</a>
+        <br />
+        <router-link :to="resourceLink">View detail</router-link>
       </nav>
     </base-card>
   </li>
@@ -23,6 +25,15 @@ export default {
     title: String,
     description: String,
     link: String,
+  },
+  computed: {
+    resourceLink() {
+      return {
+        name: 'resource-detail',
+        params: { id: this.id },
+        query: { title: this.title },
+      };
+    },
   },
 };
 </script>
@@ -40,5 +51,11 @@ header {
 
 p {
   margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
 }
 </style>
